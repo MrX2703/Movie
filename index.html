@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search - TheMoviezFlix & LuxMovies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .result {
+            width: 48%;
+            height: 600px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        .result h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Movie Search: TheMoviezFlix & LuxMovies</h1>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for movies or shows..." style="width: 400px; padding: 10px;">
+            <button onclick="searchMovies()" style="padding: 10px;">Search</button>
+        </div>
+
+        <!-- Two Divisions for TheMoviezFlix and LuxMovies Results -->
+        <div class="result-container">
+            <div id="theMoviezFlixResult" class="result">
+                <h2>TheMoviezFlix Results</h2>
+                <!-- TheMoviezFlix results will be injected here -->
+            </div>
+            <div id="luxMoviesResult" class="result">
+                <h2>LuxMovies Results</h2>
+                <!-- LuxMovies results will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function searchMovies() {
+            const query = document.getElementById('searchInput').value;
+
+            if (query) {
+                // Generate search URLs
+                const theMoviezFlixSearchUrl = `https://themoviezflix.se.net/category/dual-audio/?s=${encodeURIComponent(query)}`;
+                const luxMoviesSearchUrl = `https://luxmovies.co.in/?s=${encodeURIComponent(query)}`;
+
+                // TheMoviezFlix Search Result
+                document.getElementById('theMoviezFlixResult').innerHTML = `
+                    <h2>TheMoviezFlix Results</h2>
+                    <p>Search results for "<b>${query}</b>" on TheMoviezFlix:</p>
+                    <a href="${theMoviezFlixSearchUrl}" target="_blank">Click here to view results on TheMoviezFlix</a>
+                `;
+
+                // LuxMovies Search Result
+                document.getElementById('luxMoviesResult').innerHTML = `
+                    <h2>LuxMovies Results</h2>
+                    <p>Search results for "<b>${query}</b>" on LuxMovies:</p>
+                    <a href="${luxMoviesSearchUrl}" target="_blank">Click here to view results on LuxMovies</a>
+                `;
+            } else {
+                alert('Please enter a search term.');
+            }
+        }
+    </script>
+
+</body>
+</html>
